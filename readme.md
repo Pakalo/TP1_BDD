@@ -175,3 +175,60 @@ Notes sur l'alternative :
   ]
 }
 ```
+
+# Comment lancer l'import
+
+## Prérequis
+
+- Node.js installé sur votre machine
+- MongoDB installé et en cours d'exécution
+- MySQL installé et en cours d'exécution (port 8889)
+- Base de données CLICOM créée dans MySQL
+
+## Configuration
+
+1. Cloner le projet
+2. Installer les dépendances :
+
+```bash
+npm install
+```
+
+3. Configurer les variables d'environnement dans le fichier `.env` :
+
+```env
+MONGODB_URI=mongodb://localhost:27017/TP2
+MYSQL_HOST=localhost
+MYSQL_PORT=8889
+MYSQL_USER=root
+MYSQL_PASSWORD=root
+MYSQL_DATABASE=clicom
+```
+
+## Lancement
+
+Pour lancer l'importation des données :
+
+```bash
+npm start
+```
+
+Le script va :
+
+1. Se connecter à MongoDB et créer la base de données CLICOM_MONGO
+2. Se connecter à MySQL sur le port 8889
+3. Importer les données des tables CLIENT, PRODUIT et COMMANDE
+4. Transformer les données selon le schéma MongoDB défini
+5. Afficher le nombre de documents importés pour chaque collection
+
+## Vérification
+
+Une fois l'import terminé, vous pouvez vérifier les données dans MongoDB en utilisant MongoDB Compass ou le shell MongoDB :
+
+```bash
+mongosh
+use CLICOM_MONGO
+db.CLIENT.find()
+db.PRODUIT.find()
+db.COMMANDE.find()
+```
